@@ -4,8 +4,8 @@ extern uint16_t PB2_rate;
 extern uint16_t PB_event;
 extern uint16_t delay_count;
 // 0bXX1 for PB1 pressed, 0bX1X for PB2 pressed, 0b1XX for PB3 pressed
-extern uint8_t last_state = 0b000;
-extern uint8_t current_state = 0b000;
+extern uint8_t last_state;
+extern uint8_t current_state;
 
 void IOinit() {
     TRISBbits.TRISB8 = 0;
@@ -26,9 +26,9 @@ void IOinit() {
 void TIMINGinit() {
     newClk(500);
     
+    T3CONbits.TCKPS = 0b10; // set prescalar to 1:64
     T2CONbits.T32 = 0; // operate timer 2 as 16 bit timer
     IEC0bits.T2IE = 1; //enable timer interrupt
-    PR2 = 250;
     
     T3CONbits.TCKPS = 1; // set prescaler to 1:8
     T3CONbits.TCS = 0; // use internal clock
@@ -75,30 +75,23 @@ void IOcheck() {
 }
 
 void delay_ms(uint16_t ms_count) {
+    PR2 = 250 * ms_count / 64;
     TMR2 = 0;
-    delay_count = 0;
     T2CONbits.TON = 1;
     
-    while (delay_count < ms_count) {
-        if (PB_event) {
-            PB_event = 0;
-            break;
-        }
-        Idle();
-    }
+    Idle();
     
     T2CONbits.TON = 0;
 }
 
-inline void led_on() {
+void led_on() {
     LATBbits.LATB8 = 1;
 }
 
-inline void led_off() {
+void led_off() {
     LATBbits.LATB8 = 0;
 }
 
-inline void led_toggle() {
+void led_toggle() {
     LATBbits.LATB8 ^= 1;
-    //PB_event = 0;
 }

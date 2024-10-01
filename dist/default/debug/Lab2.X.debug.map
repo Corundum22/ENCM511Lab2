@@ -4,10 +4,15 @@ Tool Name:
   /opt/microchip/xc16/v2.10/bin/bin/../bin/elf-ld
 
 Command:
+  -T/tmp/tmp0001532d.00 \
+  -T/tmp/tmp0001532d.01 \
+  -T/tmp/tmp0001532d.02 \
+  -T/tmp/tmp0001532d.03 \
+  -T/tmp/tmp0001532d.04 \
   -p24F16KA101 \
   --mdfp=/home/jarred/.mchp_packs/Microchip/PIC24F-KA-KL-KM_DFP/1.5.253/xc16 \
   -o \
-  dist/default/production/Lab2.X.production.elf \
+  dist/default/debug/Lab2.X.debug.elf \
   -L/opt/microchip/xc16/v2.10/bin/bin/.. \
   -L/home/jarred/.mchp_packs/Microchip/PIC24F-KA-KL-KM_DFP/1.5.253/xc16/bin/../support/PIC24F/gld \
   -L/opt/microchip/xc16/v2.10/bin/bin/../../lib \
@@ -18,10 +23,13 @@ Command:
   -L/opt/microchip/xc16/v2.10/bin/bin/../../support/dsPIC33C/gld \
   -L/opt/microchip/xc16/v2.10/bin/bin/../../support/dsPIC33E/gld \
   -L/opt/microchip/xc16/v2.10/bin/bin/../../support/dsPIC33F/gld \
-  build/default/production/_ext/1910184959/assignment2_main.o \
-  build/default/production/_ext/1910184959/clkChange.o \
+  build/default/debug/functions.o \
+  build/default/debug/main.o \
+  build/default/debug/clkChange.o \
   --defsym=__MPLAB_BUILD=1 \
-  -Tp24F16KA101.gld.00 \
+  --defsym=__MPLAB_DEBUG=1 \
+  --defsym=__DEBUG=1 \
+  -Tp24F16KA101.gld.05 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -33,10 +41,10 @@ Command:
   --stackguard=16 \
   --no-force-link \
   --smart-io \
-  -Map=dist/default/production/Lab2.X.production.map \
+  -Map=dist/default/debug/Lab2.X.debug.map \
   --report-mem \
   --memorysummary \
-  dist/default/production/memoryfile.xml \
+  dist/default/debug/memoryfile.xml \
   -start-group \
   --library=c99-pic30-elf \
   --library=m-elf \
@@ -87,20 +95,25 @@ Default Scalar Model: Small
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x158           0x204  (516)
-.text                        0x358               0x18e           0x255  (597)
-.dinit                       0x4e6                 0x8             0xc  (12)
+.text                        0x200               0x14c           0x1f2  (498)
+.text                        0x34c               0x182           0x243  (579)
+.dinit                       0x4ce                 0x8             0xc  (12)
 
-                 Total "program" memory used (bytes):          0x465  (1125) 6%
+                 Total "program" memory used (bytes):          0x441  (1089) 6%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.nbss                        0x800                   0             0x8  (8)
+reserve_data_0x800           0x800                0x20            0x20  (32)
+reserve_data_0x820           0x820                 0x2             0x2  (2)
+reserve_data_0x822           0x822                 0x2             0x2  (2)
+reserve_data_0x824           0x824                 0x2             0x2  (2)
+reserve_data_0x826           0x826                0x2a            0x2a  (42)
+.nbss                        0x850                   0             0x8  (8)
 
-                 Total "data" memory used (bytes):            0x8  (8) <1%
+                 Total "data" memory used (bytes):           0x58  (88) 5%
 
 
 Dynamic Memory Usage
@@ -108,28 +121,28 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x808                               0x5f8  (1528)
+stack                        0x858                               0x5a8  (1448)
 
-                 Maximum dynamic memory (bytes):          0x5f8  (1528)
+                 Maximum dynamic memory (bytes):          0x5a8  (1448)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0800                  _PB2_rate
-                    0x0802                  _PB_event
-                    0x0804                  _delay_count
-                    0x0806                  _last_state
-                    0x0807                  _current_state
+                    0x0850                  _PB2_rate
+                    0x0852                  _PB_event
+                    0x0854                  _delay_count
+                    0x0856                  _last_state
+                    0x0857                  _current_state
 
 External Symbols in Data Memory (by name):
 
-                    0x0800                  _PB2_rate
-                    0x0802                  _PB_event
-                    0x0807                  _current_state
-                    0x0804                  _delay_count
-                    0x0806                  _last_state
+                    0x0850                  _PB2_rate
+                    0x0852                  _PB_event
+                    0x0857                  _current_state
+                    0x0854                  _delay_count
+                    0x0856                  _last_state
 
 External Symbols in Program Memory (by address):
 
@@ -137,43 +150,45 @@ External Symbols in Program Memory (by address):
                   0x00023c                  __psv_init
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
-                  0x0002d4                  __T2Interrupt
-                  0x0002e8                  __T3Interrupt
-                  0x0002f0                  __CNInterrupt
-                  0x000352                  __DefaultInterrupt
-                  0x000358                  _IOinit
-                  0x000372                  _TIMINGinit
-                  0x0003ac                  _CNinit
-                  0x0003c4                  _IOcheck
-                  0x00041c                  _delay_ms
-                  0x000440                  _led_off
-                  0x000448                  _led_toggle
-                  0x000466                  _main
-                  0x000478                  _newClk
+                  0x0002c8                  __T2Interrupt
+                  0x0002dc                  __T3Interrupt
+                  0x0002e4                  __CNInterrupt
+                  0x000346                  __DefaultInterrupt
+                  0x00034c                  _IOinit
+                  0x000366                  _TIMINGinit
+                  0x0003a6                  _CNinit
+                  0x0003be                  _IOcheck
+                  0x000404                  _delay_ms
+                  0x000420                  _led_on
+                  0x000428                  _led_off
+                  0x000430                  _led_toggle
+                  0x00044e                  _newClk
+                  0x0004bc                  _main
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0003ac                  _CNinit
-                  0x0003c4                  _IOcheck
-                  0x000358                  _IOinit
-                  0x000372                  _TIMINGinit
-                  0x0002f0                  __CNInterrupt
-                  0x000352                  __DefaultInterrupt
+                  0x0003a6                  _CNinit
+                  0x0003be                  _IOcheck
+                  0x00034c                  _IOinit
+                  0x000366                  _TIMINGinit
+                  0x0002e4                  __CNInterrupt
+                  0x000346                  __DefaultInterrupt
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
-                  0x0002d4                  __T2Interrupt
-                  0x0002e8                  __T3Interrupt
+                  0x0002c8                  __T2Interrupt
+                  0x0002dc                  __T3Interrupt
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x00041c                  _delay_ms
-                  0x000440                  _led_off
-                  0x000448                  _led_toggle
-                  0x000466                  _main
-                  0x000478                  _newClk
+                  0x000404                  _delay_ms
+                  0x000428                  _led_off
+                  0x000420                  _led_on
+                  0x000430                  _led_toggle
+                  0x0004bc                  _main
+                  0x00044e                  _newClk
 
 Memory Configuration
 
@@ -197,9 +212,37 @@ FDS              0xf80010           0x000002
 
 Linker script and memory map
 
-LOAD build/default/production/_ext/1910184959/assignment2_main.o
-LOAD build/default/production/_ext/1910184959/clkChange.o
+
+reserve_data_0x800
+                    0x0800         0x20
+                    0x0820                  . = 0x20
+ *fill*             0x0800         0x2000
+
+reserve_data_0x820
+                    0x0820          0x2
+                    0x0822                  . = 0x2
+ *fill*             0x0820          0x200
+
+reserve_data_0x822
+                    0x0822          0x2
+                    0x0824                  . = 0x2
+ *fill*             0x0822          0x200
+
+reserve_data_0x824
+                    0x0824          0x2
+                    0x0826                  . = 0x2
+ *fill*             0x0824          0x200
+
+reserve_data_0x826
+                    0x0826         0x2a
+                    0x0850                  . = 0x2a
+ *fill*             0x0826         0x2a00
+LOAD build/default/debug/functions.o
+LOAD build/default/debug/main.o
+LOAD build/default/debug/clkChange.o
                     0x0001                  __MPLAB_BUILD = 0x1
+                    0x0001                  __MPLAB_DEBUG = 0x1
+                    0x0001                  __DEBUG = 0x1
 LOAD pPIC24Fxxx
 LOAD /opt/microchip/xc16/v2.10/bin/bin/../../lib/libfx-elf.a
                     0xf80000                  __FBS = 0xf80000
@@ -226,7 +269,7 @@ LOAD /opt/microchip/xc16/v2.10/bin/bin/../../lib/libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x158
+.text             0x000200        0x14c
  *(.init)
  .init            0x000200         0x4c /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-pic30-elf.a(crt0_standard.o)
                   0x000200                  __reset
@@ -238,32 +281,32 @@ LOAD /opt/microchip/xc16/v2.10/bin/bin/../../lib/libfx-elf.a
  *(.user_init)
  *(.handle)
  *(.isr*)
- .isr.text        0x0002d4         0x7e build/default/production/_ext/1910184959/assignment2_main.o
-                  0x0002d4                  __T2Interrupt
-                  0x0002e8                  __T3Interrupt
-                  0x0002f0                  __CNInterrupt
- .isr             0x000352          0x4 default_isr
-                  0x000352                  __DefaultInterrupt
+ .isr.text        0x0002c8         0x7e build/default/debug/main.o
+                  0x0002c8                  __T2Interrupt
+                  0x0002dc                  __T3Interrupt
+                  0x0002e4                  __CNInterrupt
+ .isr             0x000346          0x4 default_isr
+                  0x000346                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x000356          0x2 /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-pic30-elf.a(crt_start_mode_normal.Meo)
-                  0x000356                  __crt_start_mode_normal
-                  0x000356                  __crt_start_mode
+                  0x00034a          0x2 /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-pic30-elf.a(crt_start_mode_normal.Meo)
+                  0x00034a                  __crt_start_mode_normal
+                  0x00034a                  __crt_start_mode
 
 usercode
  *(usercode)
 
 __FBS             0xf80000          0x2
  *(__FBS.sec*)
- __FBS.sec        0xf80000          0x2 /CW/_FBSˆ"g4i`
+ __FBS.sec        0xf80000          0x2 /CW/_FBShì?hˆW
                   0xf80000                  __FBS.sec
 
 __FGS             0xf80004          0x2
  *(__FGS.sec*)
- __FGS.sec        0xf80004          0x2 /CW/_FGS¸^f4i`
+ __FGS.sec        0xf80004          0x2 /CW/_FGS˜(?hˆW
                   0xf80004                  __FGS.sec
 
 __FOSCSEL
@@ -287,31 +330,36 @@ __FDS
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1dae
+.debug_info       0x000000       0x20d2
  *(.debug_info)
- .debug_info      0x000000       0x183f build/default/production/_ext/1910184959/assignment2_main.o
- .debug_info      0x00183f        0x56f build/default/production/_ext/1910184959/clkChange.o
+ .debug_info      0x000000       0x14d4 build/default/debug/functions.o
+ .debug_info      0x0014d4        0x69a build/default/debug/main.o
+ .debug_info      0x001b6e        0x564 build/default/debug/clkChange.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x2f6
+.debug_abbrev     0x000000        0x340
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x1d3 build/default/production/_ext/1910184959/assignment2_main.o
- .debug_abbrev    0x0001d3        0x123 build/default/production/_ext/1910184959/clkChange.o
+ .debug_abbrev    0x000000        0x149 build/default/debug/functions.o
+ .debug_abbrev    0x000149         0xd4 build/default/debug/main.o
+ .debug_abbrev    0x00021d        0x123 build/default/debug/clkChange.o
 
-.debug_line       0x000000        0x26f
+.debug_line       0x000000        0x332
  *(.debug_line)
- .debug_line      0x000000        0x16e build/default/production/_ext/1910184959/assignment2_main.o
- .debug_line      0x00016e        0x101 build/default/production/_ext/1910184959/clkChange.o
+ .debug_line      0x000000        0x130 build/default/debug/functions.o
+ .debug_line      0x000130        0x10c build/default/debug/main.o
+ .debug_line      0x00023c         0xf6 build/default/debug/clkChange.o
 
-.debug_frame      0x000000        0x174
+.debug_frame      0x000000        0x1a2
  *(.debug_frame)
- .debug_frame     0x000000        0x146 build/default/production/_ext/1910184959/assignment2_main.o
- .debug_frame     0x000146         0x2e build/default/production/_ext/1910184959/clkChange.o
+ .debug_frame     0x000000         0xe4 build/default/debug/functions.o
+ .debug_frame     0x0000e4         0x90 build/default/debug/main.o
+ .debug_frame     0x000174         0x2e build/default/debug/clkChange.o
 
-.debug_str        0x000000        0x104
+.debug_str        0x000000        0x122
  *(.debug_str)
- .debug_str       0x000000         0xee build/default/production/_ext/1910184959/assignment2_main.o
- .debug_str       0x0000ee         0x16 build/default/production/_ext/1910184959/clkChange.o
+ .debug_str       0x000000         0xaf build/default/debug/functions.o
+ .debug_str       0x0000af         0x5d build/default/debug/main.o
+ .debug_str       0x00010c         0x16 build/default/debug/clkChange.o
 
 .debug_loc
  *(.debug_loc)
@@ -320,22 +368,26 @@ __FDS
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x10f
+                  0x000000        0x12c
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0xf2 build/default/production/_ext/1910184959/assignment2_main.o
+                  0x000000         0x76 build/default/debug/functions.o
  .debug_pubnames
-                  0x0000f2         0x1d build/default/production/_ext/1910184959/clkChange.o
+                  0x000076         0x99 build/default/debug/main.o
+ .debug_pubnames
+                  0x00010f         0x1d build/default/debug/clkChange.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000         0x30
+.debug_aranges    0x000000         0x48
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/production/_ext/1910184959/assignment2_main.o
+                  0x000000         0x18 build/default/debug/functions.o
  .debug_aranges
-                  0x000018         0x18 build/default/production/_ext/1910184959/clkChange.o
+                  0x000018         0x18 build/default/debug/main.o
+ .debug_aranges
+                  0x000030         0x18 build/default/debug/clkChange.o
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -741,87 +793,92 @@ LOAD /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-pic30-elf.a
 LOAD /opt/microchip/xc16/v2.10/bin/bin/../../lib/libm-elf.a
 LOAD /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-elf.a
 END GROUP
-OUTPUT(dist/default/production/Lab2.X.production.elf elf32-pic30)
-LOAD /CW/_FGS¸^f4i`
-LOAD /CW/_FBSˆ"g4i`
-LOAD jump_table
+OUTPUT(dist/default/debug/Lab2.X.debug.elf elf32-pic30)
+LOAD /CW/_FGS˜(?hˆW
+LOAD /CW/_FBShì?hˆW
 LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000030        0x2b2
+                  0x000048        0x317
  .debug_pubtypes
-                  0x000030        0x22c build/default/production/_ext/1910184959/assignment2_main.o
+                  0x000048        0x1ee build/default/debug/functions.o
  .debug_pubtypes
-                  0x00025c         0x86 build/default/production/_ext/1910184959/clkChange.o
+                  0x000236         0xa3 build/default/debug/main.o
+ .debug_pubtypes
+                  0x0002d9         0x86 build/default/debug/clkChange.o
 
 __c30_signature
-                  0x0002e2         0x18
+                  0x00035f         0x1e
  __c30_signature
-                  0x0002e2          0x6 build/default/production/_ext/1910184959/assignment2_main.o
+                  0x00035f          0x6 build/default/debug/functions.o
  __c30_signature
-                  0x0002e8          0x6 build/default/production/_ext/1910184959/clkChange.o
+                  0x000365          0x6 build/default/debug/main.o
  __c30_signature
-                  0x0002ee          0x6 /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-pic30-elf.a(crt0_standard.o)
+                  0x00036b          0x6 build/default/debug/clkChange.o
  __c30_signature
-                  0x0002f4          0x6 /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-pic30-elf.a(data_init_standard.o)
+                  0x000371          0x6 /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-pic30-elf.a(crt0_standard.o)
+ __c30_signature
+                  0x000377          0x6 /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-pic30-elf.a(data_init_standard.o)
 
-.nbss               0x0800          0x8
- .nbss              0x0800          0x8 build/default/production/_ext/1910184959/assignment2_main.o
-                    0x0800                  _PB2_rate
-                    0x0802                  _PB_event
-                    0x0804                  _delay_count
-                    0x0806                  _last_state
-                    0x0807                  _current_state
+.nbss               0x0850          0x8
+ .nbss              0x0850          0x8 build/default/debug/main.o
+                    0x0850                  _PB2_rate
+                    0x0852                  _PB_event
+                    0x0854                  _delay_count
+                    0x0856                  _last_state
+                    0x0857                  _current_state
 
 .config_DSWDTEN
                   0xf80010          0x2
  .config_DSWDTEN
-                  0xf80010          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+                  0xf80010          0x2 build/default/debug/main.o
 
 .config_BKBUG     0xf8000e          0x2
- .config_BKBUG    0xf8000e          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+ .config_BKBUG    0xf8000e          0x2 build/default/debug/main.o
 
 .config_MCLRE     0xf8000c          0x2
- .config_MCLRE    0xf8000c          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+ .config_MCLRE    0xf8000c          0x2 build/default/debug/main.o
 
 .config_FWDTEN    0xf8000a          0x2
  .config_FWDTEN
-                  0xf8000a          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+                  0xf8000a          0x2 build/default/debug/main.o
 
 .config_FCKSM     0xf80008          0x2
- .config_FCKSM    0xf80008          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+ .config_FCKSM    0xf80008          0x2 build/default/debug/main.o
 
 .config_IESO      0xf80006          0x2
- .config_IESO     0xf80006          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+ .config_IESO     0xf80006          0x2 build/default/debug/main.o
 
 .ivt._T2Interrupt
                   0x000022          0x2
  .ivt._T2Interrupt
-                  0x000022          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+                  0x000022          0x2 build/default/debug/main.o
 
 .ivt._T3Interrupt
                   0x000024          0x2
  .ivt._T3Interrupt
-                  0x000024          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+                  0x000024          0x2 build/default/debug/main.o
 
 .ivt._CNInterrupt
                   0x00003a          0x2
  .ivt._CNInterrupt
-                  0x00003a          0x2 build/default/production/_ext/1910184959/assignment2_main.o
+                  0x00003a          0x2 build/default/debug/main.o
 
-.text             0x000358        0x18e
- .text            0x000358        0x120 build/default/production/_ext/1910184959/assignment2_main.o
-                  0x000358                  _IOinit
-                  0x000372                  _TIMINGinit
-                  0x0003ac                  _CNinit
-                  0x0003c4                  _IOcheck
-                  0x00041c                  _delay_ms
-                  0x000440                  _led_off
-                  0x000448                  _led_toggle
-                  0x000466                  _main
- .text            0x000478         0x6e build/default/production/_ext/1910184959/clkChange.o
-                  0x000478                  _newClk
+.text             0x00034c        0x182
+ .text            0x00034c        0x102 build/default/debug/functions.o
+                  0x00034c                  _IOinit
+                  0x000366                  _TIMINGinit
+                  0x0003a6                  _CNinit
+                  0x0003be                  _IOcheck
+                  0x000404                  _delay_ms
+                  0x000420                  _led_on
+                  0x000428                  _led_off
+                  0x000430                  _led_toggle
+ .text            0x00044e         0x6e build/default/debug/clkChange.o
+                  0x00044e                  _newClk
+ .text            0x0004bc         0x12 build/default/debug/main.o
+                  0x0004bc                  _main
 
-.dinit            0x0004e6          0x8
- .dinit           0x0004e6          0x8 data_init
+.dinit            0x0004ce          0x8
+ .dinit           0x0004ce          0x8 data_init

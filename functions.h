@@ -43,10 +43,10 @@ void IOcheck();
 
 void delay_ms(uint16_t ms_count);
 
-inline void led_on();
+void led_on();
 
-inline void led_off();
+void led_off();
 
-inline void led_toggle();
+void led_toggle();
 
 #endif

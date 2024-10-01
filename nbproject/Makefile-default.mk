@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../Imports/assignment2_main.c ../Imports/clkChange.c functions.c
+SOURCEFILES_QUOTED_IF_SPACED=functions.c main.c clkChange.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1910184959/assignment2_main.o ${OBJECTDIR}/_ext/1910184959/clkChange.o ${OBJECTDIR}/functions.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1910184959/assignment2_main.o.d ${OBJECTDIR}/_ext/1910184959/clkChange.o.d ${OBJECTDIR}/functions.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/functions.o ${OBJECTDIR}/main.o ${OBJECTDIR}/clkChange.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/functions.o.d ${OBJECTDIR}/main.o.d ${OBJECTDIR}/clkChange.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1910184959/assignment2_main.o ${OBJECTDIR}/_ext/1910184959/clkChange.o ${OBJECTDIR}/functions.o
+OBJECTFILES=${OBJECTDIR}/functions.o ${OBJECTDIR}/main.o ${OBJECTDIR}/clkChange.o
 
 # Source Files
-SOURCEFILES=../Imports/assignment2_main.c ../Imports/clkChange.c functions.c
+SOURCEFILES=functions.c main.c clkChange.c
 
 
 
@@ -89,42 +89,42 @@ MP_LINKER_FILE_OPTION=,--script=p24F16KA101.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/_ext/1910184959/assignment2_main.o: ../Imports/assignment2_main.c  .generated_files/flags/default/a60afc5aec7803a5f4f4d10288a1adb0d31beb50 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}/_ext/1910184959" 
-	@${RM} ${OBJECTDIR}/_ext/1910184959/assignment2_main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1910184959/assignment2_main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Imports/assignment2_main.c  -o ${OBJECTDIR}/_ext/1910184959/assignment2_main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/1910184959/assignment2_main.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
-${OBJECTDIR}/_ext/1910184959/clkChange.o: ../Imports/clkChange.c  .generated_files/flags/default/4d3dea3621df3eb46ed66585fcd5827262fdf613 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}/_ext/1910184959" 
-	@${RM} ${OBJECTDIR}/_ext/1910184959/clkChange.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1910184959/clkChange.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Imports/clkChange.c  -o ${OBJECTDIR}/_ext/1910184959/clkChange.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/1910184959/clkChange.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/functions.o: functions.c  .generated_files/flags/default/c3f3f2026895b1aed31029c8b781d1f05b46e57d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/functions.o.d 
 	@${RM} ${OBJECTDIR}/functions.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  functions.c  -o ${OBJECTDIR}/functions.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/functions.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/b13cd76485e340040b5181c7cb9f636a1b45f599 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/main.o.d 
+	@${RM} ${OBJECTDIR}/main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/main.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/clkChange.o: clkChange.c  .generated_files/flags/default/c30047a87e0983bea6c6d70bb8ed96652d0d74f6 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/clkChange.o.d 
+	@${RM} ${OBJECTDIR}/clkChange.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  clkChange.c  -o ${OBJECTDIR}/clkChange.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/clkChange.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
-${OBJECTDIR}/_ext/1910184959/assignment2_main.o: ../Imports/assignment2_main.c  .generated_files/flags/default/d86757c83935c9db86701a79acbe0c533c5d81e .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}/_ext/1910184959" 
-	@${RM} ${OBJECTDIR}/_ext/1910184959/assignment2_main.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1910184959/assignment2_main.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Imports/assignment2_main.c  -o ${OBJECTDIR}/_ext/1910184959/assignment2_main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/1910184959/assignment2_main.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
-${OBJECTDIR}/_ext/1910184959/clkChange.o: ../Imports/clkChange.c  .generated_files/flags/default/be4cb6e98a8f26eca8cb3df42ce9d545b11d8de .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}/_ext/1910184959" 
-	@${RM} ${OBJECTDIR}/_ext/1910184959/clkChange.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1910184959/clkChange.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  ../Imports/clkChange.c  -o ${OBJECTDIR}/_ext/1910184959/clkChange.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/_ext/1910184959/clkChange.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/functions.o: functions.c  .generated_files/flags/default/93840bea4eb5480a7c1dbd62485a96c9bd5f5993 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/functions.o.d 
 	@${RM} ${OBJECTDIR}/functions.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  functions.c  -o ${OBJECTDIR}/functions.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/functions.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/bd40c5c1a150b3d6756de1812d4781995e7746c2 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/main.o.d 
+	@${RM} ${OBJECTDIR}/main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  main.c  -o ${OBJECTDIR}/main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/main.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/clkChange.o: clkChange.c  .generated_files/flags/default/9d8bdf3e52903296eddc3e3ec48b2b4e570ef0ea .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/clkChange.o.d 
+	@${RM} ${OBJECTDIR}/clkChange.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  clkChange.c  -o ${OBJECTDIR}/clkChange.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/clkChange.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 
