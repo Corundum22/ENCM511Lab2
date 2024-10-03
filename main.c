@@ -1,8 +1,8 @@
 /*
  * File:   main.c
- * Author: UPDATE THIS WITH YOUR GROUP MEMBER NAMES OR POTENTIALLY LOSE POINTS
+ * Author: Jarred Eisbrenner, <add additional names>
  *
- * Created on: USE THE INFORMATION FROM THE HEADER MPLAB X IDE GENERATES FOR YOU
+ * Created on: October 1, 2024
  */
 
 // FBS
@@ -66,13 +66,8 @@ uint8_t last_state = 0b000;
 uint8_t current_state = 0b000;
 
 
-/**
- * You might find it useful to add your own #defines to improve readability here
- */
-
-
 int main(void) {
-    AD1PCFG = 0xFFFF; /* keep this line as it sets I/O pins that can also be analog to be digital */
+    AD1PCFG = 0xFFFF; // set analog pins to digital
     
     TIMINGinit();
     
@@ -93,18 +88,15 @@ void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void){
     delay_count++;
     TMR2 = 0;
     
-    //Don't forget to clear the timer 2 interrupt flag!
-    IFS0bits.T2IF = 0;
+    IFS0bits.T2IF = 0; // clear interrupt flag
 }
 
 void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void){
-    //Don't forget to clear the timer 2 interrupt flag!
-    IFS0bits.T3IF = 0;
+    IFS0bits.T3IF = 0; // clear interrupt flag
 }
 
 void __attribute__((interrupt, no_auto_psv)) _CNInterrupt(void){
-    //Don't forget to clear the CN interrupt flag!
-    IFS1bits.CNIF = 0;
+    IFS1bits.CNIF = 0; // clear interrupt flag
     
     last_state = current_state;
     current_state = (BUTTON1) | (BUTTON2 << 1) | (BUTTON3 << 2);

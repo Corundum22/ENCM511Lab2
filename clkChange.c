@@ -1,7 +1,6 @@
 #include "clkChange.h"
 
 
-
 void newClk(unsigned int clkval) {
     uint8_t COSCNOSC;
     switch(clkval) {
