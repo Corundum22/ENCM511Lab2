@@ -89,10 +89,10 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x14c           0x1f2  (498)
-.text                        0x34c               0x1ac           0x282  (642)
-.dinit                       0x4f8                 0x8             0xc  (12)
+.text                        0x34c               0x1aa           0x27f  (639)
+.dinit                       0x4f6                 0x8             0xc  (12)
 
-                 Total "program" memory used (bytes):          0x480  (1152) 7%
+                 Total "program" memory used (bytes):          0x47d  (1149) 7%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x600]
@@ -146,12 +146,12 @@ External Symbols in Program Memory (by address):
                   0x000366                  _TIMINGinit
                   0x0003a0                  _CNinit
                   0x0003b8                  _IOcheck
-                  0x000426                  _delay_ms
-                  0x00044a                  _led_on
-                  0x000452                  _led_off
-                  0x00045a                  _led_toggle
-                  0x000478                  _newClk
-                  0x0004e6                  _main
+                  0x000424                  _delay_ms
+                  0x000448                  _led_on
+                  0x000450                  _led_off
+                  0x000458                  _led_toggle
+                  0x000476                  _newClk
+                  0x0004e4                  _main
                   0xf80000                  __FBS.sec
                   0xf80004                  __FGS.sec
 
@@ -171,12 +171,12 @@ External Symbols in Program Memory (by name):
                   0x000252                  __data_init_standard
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000426                  _delay_ms
-                  0x000452                  _led_off
-                  0x00044a                  _led_on
-                  0x00045a                  _led_toggle
-                  0x0004e6                  _main
-                  0x000478                  _newClk
+                  0x000424                  _delay_ms
+                  0x000450                  _led_off
+                  0x000448                  _led_on
+                  0x000458                  _led_toggle
+                  0x0004e4                  _main
+                  0x000476                  _newClk
 
 Memory Configuration
 
@@ -262,12 +262,12 @@ usercode
 
 __FBS             0xf80000          0x2
  *(__FBS.sec*)
- __FBS.sec        0xf80000          0x2 /CW/_FBS®n4Kb[
+ __FBS.sec        0xf80000          0x2 /CW/_FBS®ÆÉÅ·c
                   0xf80000                  __FBS.sec
 
 __FGS             0xf80004          0x2
  *(__FGS.sec*)
- __FGS.sec        0xf80004          0x2 /CW/_FGSË¨3Kb[
+ __FGS.sec        0xf80004          0x2 /CW/_FGSËÏÇÅ·c
                   0xf80004                  __FGS.sec
 
 __FOSCSEL
@@ -304,11 +304,11 @@ __FDS
  .debug_abbrev    0x000149         0xd4 build/default/production/main.o
  .debug_abbrev    0x00021d        0x123 build/default/production/clkChange.o
 
-.debug_line       0x000000        0x33f
+.debug_line       0x000000        0x33e
  *(.debug_line)
- .debug_line      0x000000        0x13d build/default/production/functions.o
- .debug_line      0x00013d        0x10c build/default/production/main.o
- .debug_line      0x000249         0xf6 build/default/production/clkChange.o
+ .debug_line      0x000000        0x13c build/default/production/functions.o
+ .debug_line      0x00013c        0x10c build/default/production/main.o
+ .debug_line      0x000248         0xf6 build/default/production/clkChange.o
 
 .debug_frame      0x000000        0x1a2
  *(.debug_frame)
@@ -755,8 +755,8 @@ LOAD /opt/microchip/xc16/v2.10/bin/bin/../../lib/libm-elf.a
 LOAD /opt/microchip/xc16/v2.10/bin/bin/../../lib/libc99-elf.a
 END GROUP
 OUTPUT(dist/default/production/Lab2.X.production.elf elf32-pic30)
-LOAD /CW/_FGSË¨3Kb[
-LOAD /CW/_FBS®n4Kb[
+LOAD /CW/_FGSËÏÇÅ·c
+LOAD /CW/_FBS®ÆÉÅ·c
 LOAD default_isr
 LOAD data_init
 
@@ -826,20 +826,20 @@ __c30_signature
  .ivt._CNInterrupt
                   0x00003a          0x2 build/default/production/main.o
 
-.text             0x00034c        0x1ac
- .text            0x00034c        0x12c build/default/production/functions.o
+.text             0x00034c        0x1aa
+ .text            0x00034c        0x12a build/default/production/functions.o
                   0x00034c                  _IOinit
                   0x000366                  _TIMINGinit
                   0x0003a0                  _CNinit
                   0x0003b8                  _IOcheck
-                  0x000426                  _delay_ms
-                  0x00044a                  _led_on
-                  0x000452                  _led_off
-                  0x00045a                  _led_toggle
- .text            0x000478         0x6e build/default/production/clkChange.o
-                  0x000478                  _newClk
- .text            0x0004e6         0x12 build/default/production/main.o
-                  0x0004e6                  _main
+                  0x000424                  _delay_ms
+                  0x000448                  _led_on
+                  0x000450                  _led_off
+                  0x000458                  _led_toggle
+ .text            0x000476         0x6e build/default/production/clkChange.o
+                  0x000476                  _newClk
+ .text            0x0004e4         0x12 build/default/production/main.o
+                  0x0004e4                  _main
 
-.dinit            0x0004f8          0x8
- .dinit           0x0004f8          0x8 data_init
+.dinit            0x0004f6          0x8
+ .dinit           0x0004f6          0x8 data_init

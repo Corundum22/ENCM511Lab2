@@ -28,7 +28,7 @@ void TIMINGinit() {
     
     T2CONbits.T32 = 0; // operate timer 2 as 16 bit timer
     IEC0bits.T2IE = 1; //enable timer interrupt
-    PR2 = 250;
+    PR2 = 250; // count for 1 ms
     
     T3CONbits.TCKPS = 1; // set prescaler to 1:8
     T3CONbits.TCS = 0; // use internal clock
@@ -52,6 +52,7 @@ void CNinit() {
 }
 
 void IOcheck() {
+    PB_event = 0;
     while (current_state == 0b101) {
         delay_ms(4000);
         if (current_state != 0b101) break;
@@ -74,8 +75,6 @@ void IOcheck() {
     }
     led_off();
     Idle();
-    asm("nop"); // this starts executing before CNInterrupt
-    PB_event = 0; // this executes after CNInterrupt thanks to the previous nop
 }
 
 void delay_ms(uint16_t ms_count) {
