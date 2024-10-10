@@ -26,9 +26,9 @@ void IOinit() {
 void TIMINGinit() {
     newClk(500);
     
-    T3CONbits.TCKPS = 0b10; // set prescalar to 1:64
     T2CONbits.T32 = 0; // operate timer 2 as 16 bit timer
     IEC0bits.T2IE = 1; //enable timer interrupt
+    PR2 = 250;
     
     T3CONbits.TCKPS = 1; // set prescaler to 1:8
     T3CONbits.TCS = 0; // use internal clock
@@ -53,20 +53,24 @@ void CNinit() {
 
 void IOcheck() {
     while (current_state == 0b101) {
-        led_toggle();
         delay_ms(4000);
+        if (current_state != 0b101) break;
+        led_toggle();
     }
     while (current_state == 0b011) {
-        led_toggle();
         delay_ms(500);
+        if (current_state != 0b011) break;
+        led_toggle();
     }
     while (current_state == 0b001) {
-        led_toggle();
         delay_ms(250);
+        if (current_state != 0b001) break;
+        led_toggle();
     }
     while (current_state == 0b010) {
-        led_toggle();
         delay_ms(PB2_rate);
+        if (current_state != 0b010) break;
+        led_toggle();
     }
     led_off();
     Idle();
@@ -75,11 +79,17 @@ void IOcheck() {
 }
 
 void delay_ms(uint16_t ms_count) {
-    PR2 = 250 * ms_count / 64;
     TMR2 = 0;
+    delay_count = 0;
     T2CONbits.TON = 1;
     
-    Idle();
+    while (delay_count < ms_count) {
+        if (PB_event) {
+            PB_event = 0;
+            break;
+        }
+        Idle();
+    }
     
     T2CONbits.TON = 0;
 }
